@@ -15,8 +15,33 @@ func main() {
 		io.WriteString(w, responseMessage) // wにレスポンスを書き込む
 	}
 
+	postArticleHandler := func(w http.ResponseWriter, req *http.Request) {
+		io.WriteString(w, "Article posted!")
+	}
+
+	articleListHandler := func(w http.ResponseWriter, req *http.Request) {
+		io.WriteString(w, "Article list!")
+	}
+
+	articleDetailHandler := func(w http.ResponseWriter, req *http.Request) {
+		io.WriteString(w, "Article detail!")
+	}
+
+	postNiceHandler := func(w http.ResponseWriter, req *http.Request) {
+		io.WriteString(w, "Nice posted!")
+	}
+
+	postCommentHandler := func(w http.ResponseWriter, req *http.Request) {
+		io.WriteString(w, "Comment posted!")
+	}
+
 	// ハンドラの登録
-	http.HandleFunc("/", helloHandler)
+	http.HandleFunc("/hello", helloHandler)
+	http.HandleFunc("/article", postArticleHandler)
+	http.HandleFunc("/article/list", articleListHandler)
+	http.HandleFunc("/article/1", articleDetailHandler)
+	http.HandleFunc("/nice", postNiceHandler)
+	http.HandleFunc("/comment", postCommentHandler)
 
 	// サーバー起動時のログ出力
 	log.Println("Listening on port 8080")
